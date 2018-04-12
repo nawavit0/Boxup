@@ -1,0 +1,103 @@
+<div class="app flex-row align-items-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card mx-4">
+          <div class="card-body p-4">
+            <h1>Register</h1>
+            <p class="text-muted">Create your account</p>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-credit-card"></i></span>
+              </div>
+              <input type="text" class="form-control" name="card" [(ngModel)]="model.card" #card="ngModel" placeholder="Card ID">
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-user"></i></span>
+              </div>
+              <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" placeholder="Username">
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-lock"></i></span>
+              </div>
+              <input type="password" class="form-control"  name="password" [(ngModel)]="model.password" #password="ngModel" placeholder="Password">
+            </div>
+
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-lock"></i></span>
+              </div>
+              <input type="password" class="form-control" name="repassword" [(ngModel)]="model.repassword" #repassword="ngModel" placeholder="Repeat password">
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-pencil"></i></span>
+              </div>
+              <input type="text" class="form-control" name="firstname" [(ngModel)]="model.firstname" #firstname="ngModel" placeholder="Firstname">
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-pencil"></i></span>
+              </div>
+              <input type="text" class="form-control" name="lastname" [(ngModel)]="model.lastname" #lastname="ngModel" placeholder="Lastname">
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-calendar"></i></span>
+              </div>
+              <input type="date" class="form-control" name="dob" [(ngModel)]="model.dob" #dob="ngModel" placeholder="Date of birth">
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-venus-mars"></i></span>
+              </div>
+              <select class="form-control" name="gender" [(ngModel)]="model.gender" #gender="ngModel">
+                <option value="" hidden>Gender</option>  
+                <option *ngFor="let anGender of genderList" [ngValue]="anGender">
+                    {{ anGender }}
+                </option>  
+                </select>
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-home"></i></span>
+              </div>
+              <input type="text" class="form-control" name="address" [(ngModel)]="model.address" #address="ngModel" placeholder="Address">
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-briefcase"></i></span>
+              </div>
+              <input type="text" class="form-control" name="academy" [(ngModel)]="model.academy" #academy="ngModel" placeholder="Academy">
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-flag"></i></span>
+              </div>
+              <select class="form-control" name="edu" [(ngModel)]="model.edu" #edu="ngModel">
+                <option value="" hidden>Educational level</option> 
+                <option *ngFor="let anEdu of eduList" [ngValue]="anEdu">
+                  {{ anEdu }}
+                </option>  
+              </select>
+            </div>
+
+            <button type="button" class="btn btn-block btn-success" (click)="register()">Create Account</button>
+            <button type="button" class="btn btn-block btn" [routerLink]="['/pages/login']">Already have an account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

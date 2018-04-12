@@ -1,0 +1,240 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-sm-8">
+                <i class="fa fa-align-justify"></i> Number of learned words in {{radioModelBar}} months
+              </div>
+              <div class="col-sm-4">
+                <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModelBar" btnRadio="3" id="option1" (click)="setBarChart()">3 Months</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModelBar" btnRadio="6" id="option2" (click)="setBarChart()">6 Months</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModelBar" btnRadio="9" id="option3" (click)="setBarChart()">9 Months</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-wrapper">
+              <canvas baseChart class="chart"
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+              </canvas>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-sm-8">
+                <i class="fa fa-align-justify"></i> Number of play in {{radioModelLine}} months
+              </div>
+              <div class="col-sm-4">
+                <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModelLine" btnRadio="3" id="option1" (click)="setLineChart()">3 Months</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModelLine" btnRadio="6" id="option2" (click)="setLineChart()">6 Months</label>
+                    <label class="btn btn-outline-secondary" [(ngModel)]="radioModelLine" btnRadio="9" id="option3" (click)="setLineChart()">9 Months</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-wrapper">
+              <canvas baseChart class="chart"
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [colors]="lineChartColours"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)">
+              </canvas>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+          <div class="card-header">
+              <div class="row">
+                <div class="col-sm-12">
+                  <i class="fa fa-align-justify"></i> Detail of play
+                </div>
+              </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-6 col-lg-12">
+                        <div class="card">
+                          <div class="card-body p-3 clearfix">
+                            <i class="fa fa-book bg-primary p-3 font-2xl mr-3 float-left"></i>
+                            <div class="h5 text-primary mb-0 mt-2">{{totalWord}}</div>
+                            <div class="text-muted text-uppercase font-weight-bold font-xs">Learned words</div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-12">
+                        <div class="card">
+                          <div class="card-body p-3 clearfix">
+                            <i class="fa fa-pencil-square-o bg-primary p-3 font-2xl mr-3 float-left"></i>
+                            <div class="h5 text-primary mb-0 mt-2">{{totalPlay}}</div>
+                            <div class="text-muted text-uppercase font-weight-bold font-xs">Play count</div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-6 col-lg-12">
+                      <div class="card">
+                        <div class="card-body p-3 clearfix">
+                          <i class="fa fa-times-rectangle-o bg-danger p-3 font-2xl mr-3 float-left"></i>
+                          <div class="h5 text-danger mb-0 mt-2">{{totalSkipWord}}</div>
+                          <div class="text-muted text-uppercase font-weight-bold font-xs">Skip words</div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-6 col-lg-12">
+                        <div class="card">
+                          <div class="card-body p-3 clearfix">
+                            <i class="fa fa-clock-o bg-warning p-3 font-2xl mr-3 float-left"></i>
+                            <div class="h5 text-warning mb-0 mt-2">{{minSpendTime}}mins {{secSpendTime}}sec</div>
+                            <div class="text-muted text-uppercase font-weight-bold font-xs">Total spend time</div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+              <!-- <div class="col-sm-8">
+                <div class="progress-group mb-4">
+                  <div class="progress-group-prepend">
+                    <span class="progress-group-text">
+                      Monday
+                    </span>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 34%" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="progress-group mb-4">
+                  <div class="progress-group-prepend">
+                    <span class="progress-group-text">
+                      Tuesday
+                    </span>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 56%" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 94%" aria-valuenow="94" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="progress-group mb-4">
+                  <div class="progress-group-prepend">
+                    <span class="progress-group-text">
+                      Wednesday
+                    </span>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 12%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 67%" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="progress-group mb-4">
+                  <div class="progress-group-prepend">
+                    <span class="progress-group-text">
+                      Thursday
+                    </span>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 43%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 91%" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="progress-group mb-4">
+                  <div class="progress-group-prepend">
+                    <span class="progress-group-text">
+                      Friday
+                    </span>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 22%" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 73%" aria-valuenow="73" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="progress-group mb-4">
+                  <div class="progress-group-prepend">
+                    <span class="progress-group-text">
+                      Saturday
+                    </span>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 53%" aria-valuenow="53" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="progress-group mb-4">
+                  <div class="progress-group-prepend">
+                    <span class="progress-group-text">
+                      Sunday
+                    </span>
+                  </div>
+                  <div class="progress-group-bars">
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-info" role="progressbar" style="width: 9%" aria-valuenow="9" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress progress-xs">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 69%" aria-valuenow="69" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+      </div>
+    </div>
+
+  </div>
+</div>
