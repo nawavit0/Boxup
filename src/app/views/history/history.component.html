@@ -1,0 +1,108 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> History Detail
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <p>CHAPTER:  <b>{{selectedChapter | uppercase}}</b></p>
+              <p>STAGE:  <b>{{selectedStage | uppercase}}</b></p>
+              <p>NUMBER OF WORDS:  <b>{{selectedWordsNum | uppercase}}</b></p>
+            </div>
+            <div class="col-sm-6">
+              <p>DATE:  <b>{{selectedDate | uppercase}}</b></p>
+              <p>TOTAL SCORE:  <b>{{selectedTotalScore | uppercase}}</b></p>
+              <p>STATUS:  <span [ngClass]="{'badge badge-success': selectedStatus=='pass', 'badge badge-danger': selectedStatus=='fail'}">{{selectedStatus | uppercase}}</span></p>
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-sm-12" *ngIf="isSlected">
+                <hr class="my-4">
+                <table class="table">
+                    <thead>
+                        <tr>
+                          <th>Word</th>
+                          <th>Score</th>
+                          <th>Check Quantity</th>
+                          <th>Hint Quantity</th>
+                          <th>Spend Time</th>
+                          <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let selectedWord of selectedWords">
+                        <td>{{selectedWord.Word | uppercase}}</td>
+                        <td>{{selectedWord.Score}}</td>
+                        <td>{{selectedWord.Check_Qty}}</td>
+                        <td>{{selectedWord.Hint_Qty}}</td>
+                        <td>{{selectedWord.Spend_Time}} s</td>
+                        <td>{{selectedWord.Answer_Status | uppercase}}</td>
+                      </tr>
+                    </tbody>
+                </table>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-sm-3">
+              <i class="fa fa-align-justify"></i> History Table
+            </div>
+          </div>
+          <hr>
+          <form>
+            <div class="form-group row">
+              <!-- <div class="input-group-addon" style="width:50px;"><i class="glyphicon glyphicon-search"></i></div> -->
+              <div class="col-sm-1">
+                  <span class="glyphicon glyphicon-search"></span>Filter by column: 
+              </div>
+              <div class="col-sm-5">
+                <select class="form-control" name="searchColumn" [(ngModel)]="searchColumn" placeholder="Choose a column...">
+                  <option value="Date_Time">Date</option>
+                  <option value="Chapter_Name">Chapter</option>
+                  <option value="Stage_Name">Stage</option>
+                  <option value="Total_Score">Score</option>
+                  <option value="Stage_Status">Status</option>
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" name="searchString" placeholder="Type to search..." [(ngModel)]="searchString">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Chapter</th>
+                <th>Stage</th>
+                <th>Score</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="clickableRow" *ngFor="let playingLog of playingLogs | filter: searchColumn : searchString;" [ngClass]="{selectedTable: selectedLog==playingLog.PlayingLog_ID, notSelectedTable: selectedLog!=playingLog.PlayingLog_ID}" (click)="selectLog(playingLog.PlayingLog_ID, playingLog.Date_Time, playingLog.Chapter_Name, playingLog.Chapter_Des, playingLog.Stage_Name, playingLog.Total_Score, playingLog.Stage_Status)">
+                <td>{{playingLog.Date_Time}}</td>
+                <td>{{playingLog.Chapter_Name}}: {{playingLog.Chapter_Des}}</td>
+                <td>{{playingLog.Stage_Name}}</td>
+                <td>{{playingLog.Total_Score.toString()}}</td>
+                <td>{{playingLog.Stage_Status}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

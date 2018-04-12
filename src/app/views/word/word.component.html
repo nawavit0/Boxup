@@ -1,0 +1,48 @@
+<div class="animated fadeIn">
+    <div class="row">
+      <div class="col-lg-12">
+          <div class="card">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <i class="fa fa-align-justify"></i> Word Detail
+                  </div>
+                </div>
+                <hr>
+                <form>
+                  <div class="form-group row">
+                    <!-- <div class="input-group-addon" style="width:50px;"><i class="glyphicon glyphicon-search"></i></div> -->
+                    <div class="col-sm-2">
+                        <span class="glyphicon glyphicon-search"></span>Search by word ID: 
+                    </div>
+                    <div class="col-sm-8">
+                      <input type="text" class="form-control" name="searchStringID" placeholder="Type to search..." [(ngModel)]="searchStringID">
+                    </div>
+                    <div class="col-sm-2">
+                      <span class="input-group-append">
+                          <button type="button" class="btn btn-primary" (click)="searchWord()">Search</button>
+                        </span>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-5">
+                      <img src="{{imgWord}}" style="width:100%" alt="{{wordDetail.Word}}"/>
+                    </div>
+                    <div class="col-sm-3">
+                      <p>WORD ID:  <b>{{wordDetail.Word_ID | uppercase}}</b></p>
+                      <p>WORD:  <b>{{wordDetail.Word | uppercase}}</b></p>
+                      <p>LENGTH:  <b>{{wordDetail.Length | uppercase}}</b></p>
+                    </div>
+                    <div class="col-sm-4">
+                      <p>DEFINITION:  <b>{{wordDetail.Definition | uppercase}}</b></p>
+                      <p>SAMPLE SENTENCE:  <b>{{wordDetail.Sample_Sentence | uppercase}}</b></p>
+                      <p>LEVEL:  <b>{{wordDetail.Level | uppercase}}</b></p>
+                    </div>
+                  </div>
+              </div>
+      </div>
+    </div>
+</div>
